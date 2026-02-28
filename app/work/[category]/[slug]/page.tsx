@@ -8,14 +8,15 @@ import Header from '../../../components/Header'
 import Footer from '../../../components/Footer'
 
 interface CaseStudyPageProps {
-  params: {
+  params: Promise<{
     category: string
     slug: string
-  }
+  }>
 }
 
-export default function CaseStudyPage({ params }: CaseStudyPageProps) {
-  const caseStudy = getCaseStudyBySlug(params.category, params.slug)
+export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
+  const { category, slug } = await params
+  const caseStudy = getCaseStudyBySlug(category, slug)
   const [isExpanded, setIsExpanded] = useState(false)
 
   if (!caseStudy) {
