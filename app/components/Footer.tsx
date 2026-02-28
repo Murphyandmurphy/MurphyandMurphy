@@ -22,7 +22,7 @@ export default function Footer() {
             viewport={{ once: true }}
           >
             Have something we could work on together?<br />
-            we'd love to chat.
+            we&apos;d love to chat.
           </motion.h2>
           <motion.p 
             className="text-white text-lg mb-16"

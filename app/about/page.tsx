@@ -20,7 +20,7 @@ export default function About() {
             viewport={{ once: true }}
           >
             <p className="text-2xl md:text-3xl leading-relaxed max-w-3xl" style={{ color: '#115E3C' }}>
-              We're a collaborative of{" "}
+              We&apos;re a collaborative of{" "}
               <span className="line-through">food-world</span> brand and marketing specialists who help restaurants, hotels, bars, and destinations build brands that make people stop scrolling and start booking.
             </p>
           </motion.div>
@@ -65,7 +65,7 @@ export default function About() {
                   Just want some fresh ideas?
                 </p>
                 <p className="text-[18px] md:text-[23px] leading-relaxed mb-6" style={{ color: '#115E3C' }}>  
-                  Whatever you need to get cookin', we can help with one-off projects or we can create a bespoke set-monthly package that gets you where you need to be.
+                  Whatever you need to get cookin, we can help with one-off projects or we can create a bespoke set-monthly package that gets you where you need to be.
                 </p>
               </div>
             </div>

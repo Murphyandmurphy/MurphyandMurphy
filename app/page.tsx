@@ -14,7 +14,7 @@ export default function Home() {
     const timer = setInterval(() => {
       setDirection(1)
       setActiveSlide((prev) => (prev + 1) % 3)
-    }, 8000) // Changed from 5000 to 8000 for slower transitions
+    }, 8000)
 
     return () => clearInterval(timer)
   }, [])
@@ -48,11 +48,10 @@ export default function Home() {
         ></iframe>
         <div className="absolute inset-0 bg-black/10"></div>
       </div>
-
+            
       {/* Hero Section - Scrolls over video */}
       <main className="relative z-10 px-6 md:px-8 lg:px-12 h-[66vh] flex items-end pb-12" style={{ backgroundColor: '#FBF7FA' }}>
         <div className="max-w-[1800px] w-full">
-          {/* Animated Headline */}
           <motion.h1 
             className="text-[40px] md:text-[64px] font-normal leading-none tracking-tighter w-full md:w-2/3"
             style={{ color: '#000000ff' }}
@@ -66,12 +65,9 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Video Reveal Section - This creates the reveal effect */}
+      {/* Video Reveal Section */}
       <section className="relative z-5 h-screen">
-        {/* This div will reveal the video as it scrolls into view */}
         <div className="h-full w-full"></div>
-        
-        {/* Optional Video Overlay Content */}
         <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -80,18 +76,14 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center text-white"
           >
-            {/* You can add overlay content here if needed */}
           </motion.div>
         </div>
       </section>
 
-      {/* Continue with sections below - These will scroll over the video initially, then have their own background */}
       <div className="relative z-10" style={{ backgroundColor: '#FBF7FA' }}>
         
-        {/* Services Section */}
         <section className="px-6 md:px-12 lg:px-24 pt-20 pb-32">
           <div className="max-w-[1800px] mx-auto">
-            {/* Portfolio Section */}
             <motion.div
               className="mb-32"
               initial={{ opacity: 0, y: 30 }}
@@ -115,9 +107,7 @@ export default function Home() {
                 </a>
               </div>
 
-              {/* Portfolio Grid */}
               <div className="mb-8">
-                {/* First Row - Two Half-Width Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                   {portfolioProjects
                     .filter(project => project.type === 'half')
@@ -128,7 +118,6 @@ export default function Home() {
                     })}
                 </div>
                 
-                {/* Second Row - Three Third-Width Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {portfolioProjects
                     .filter(project => project.type === 'third')
@@ -143,7 +132,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Client Logos Section */}
         <section className="py-32 bg-white">
           <div className="px-6 md:px-12 lg:px-24">
             <div className="max-w-[1800px] mx-auto">
@@ -155,12 +143,11 @@ export default function Home() {
                 viewport={{ once: true }}
               >
                 <div className="px-6 md:px-0">
-                  <p className="text-[18px] md:text-[40px] custom-heading mb-12" style={{ color: '#115E3C' }}>We've worked with</p>
+                  <p className="text-[18px] md:text-[40px] custom-heading mb-12" style={{ color: '#115E3C' }}>We&apos;ve worked with</p>
                 </div>
                 
                 <div className="relative h-[600px] overflow-hidden">
                   {[
-                    // First set of 10 logos
                     [
                       { name: 'THE MAYFAIR CHIPPY', image: '/logos/THE_MAYFAIR_CHIPPY.jpg' },
                       { name: 'THE RITZ', image: '/logos/TheRitz.jpg' },
@@ -173,7 +160,6 @@ export default function Home() {
                       { name: 'CHARD FARM', image: '/logos/Chard_Farm.jpg' },
                       { name: 'POLUPOKE', image: '/logos/Polupoke.jpg' },
                     ],
-                    // Second set of 10 logos
                     [
                       { name: 'QUALITY CHOP', image: '/logos/The_Quality_Chop_House.jpg' },
                       { name: 'GREENHOUSES', image: '/logos/The_Greenhouses.jpg' },
@@ -186,7 +172,6 @@ export default function Home() {
                       { name: 'MUCCIS', image: '/logos/Muccis.jpg' },
                       { name: 'GARGOTTE', image: '/logos/Gargotte.jpg' },
                     ],
-                    // Third set of 10 logos
                     [
                       { name: 'RARE TEA', image: '/logos/Rare_Tea_Co.jpg' },
                       { name: 'PICTURE', image: '/logos/Picture.jpg' },
@@ -210,7 +195,6 @@ export default function Home() {
                       }}
                       transition={{ duration: 1.2, ease: "easeInOut" }}
                     >
-                      {/* Changed grid-cols-5 to grid-cols-3 for mobile */}
                       <div className="grid grid-cols-3 md:grid-cols-5 gap-0 md:gap-2 px-6 md:px-0">
                         {logoSet.map((logo, index) => (
                           <motion.div
@@ -237,7 +221,6 @@ export default function Home() {
         </section>
       </div>
 
-      {/* Footer - Always opaque */}
       <div className="relative z-50" style={{ backgroundColor: '#FBF7FA' }}>
         <div className="bg-white">
           <Footer />

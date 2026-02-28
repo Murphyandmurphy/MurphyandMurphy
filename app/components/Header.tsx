@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import Link from 'next/link'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -8,9 +9,9 @@ export default function Header() {
     <header className="px-6 py-6 md:px-8 lg:px-12">
       <div className="max-w-[1800px] mx-auto flex justify-between items-center">
         <div>
-          <a href="/" className="text-[24px] md:text-[32px] font-normal" style={{ color: 'rgba(0, 0, 0, 1)' }}>
+          <Link href="/" className="text-[24px] md:text-[32px] font-normal" style={{ color: 'rgba(0, 0, 0, 1)' }}>
             Craig Murphy
-          </a>
+          </Link>
         </div>
         
         {/* Desktop Navigation */}
