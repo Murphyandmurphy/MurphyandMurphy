@@ -60,7 +60,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-             Designer &amp;<br />Creative Director
+             We're a creative collaborative helping businesses build great brands on every platform.
           </motion.h1>
         </div>
       </main>
