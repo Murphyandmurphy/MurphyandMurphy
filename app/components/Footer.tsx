@@ -7,7 +7,7 @@ export default function Footer() {
     <>
       {/* Animated CTA Section */}
       <motion.section 
-        className="bg-[#115E3C] px-6 py-20 md:px-8 lg:px-12"
+        className="bg-[#1a1a1a] px-6 py-20 md:px-8 lg:px-12"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -47,7 +47,7 @@ export default function Footer() {
       </motion.section>
 
       {/* Footer */}
-      <footer className="bg-[#115E3C] px-6 pb-8 md:px-8 lg:px-12">
+      <footer className="bg-[#1a1a1a] px-6 pb-8 md:px-8 lg:px-12">
   <div className="max-w-[1800px] mx-auto">
     <div className="grid md:grid-cols-4 gap-8 text-white text-sm">
       <div>

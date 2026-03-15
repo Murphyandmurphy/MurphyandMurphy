@@ -10,7 +10,7 @@ export default function Header() {
       <div className="max-w-[1800px] mx-auto flex justify-between items-center">
         <div>
           <Link href="/" className="text-[24px] md:text-[32px] font-normal" style={{ color: 'rgba(0, 0, 0, 1)' }}>
-            Craig Murphy
+            Murphy+Murphy
           </Link>
         </div>
         

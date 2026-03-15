@@ -1,8 +1,8 @@
 'use client'
-import { motion, AnimatePresence } from 'framer-motion'
-import { notFound } from 'next/navigation'
-import Link from 'next/link'
+import { use } from 'react'
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import Link from 'next/link'
 import { getCaseStudyBySlug } from '../../../data/caseStudiesData'
 import Header from '../../../components/Header'
 import Footer from '../../../components/Footer'
@@ -14,32 +14,47 @@ interface CaseStudyPageProps {
   }>
 }
 
-export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
-  const { category, slug } = await params
+export default function CaseStudyPage({ params }: CaseStudyPageProps) {
+  const { category, slug } = use(params)
   const caseStudy = getCaseStudyBySlug(category, slug)
   const [isExpanded, setIsExpanded] = useState(false)
 
   if (!caseStudy) {
-    notFound()
+    return (
+      <div className="min-h-screen" style={{ backgroundColor: '#FBF7FA' }}>
+        <Header />
+        <main className="px-6 md:px-12 lg:px-24 pt-16 md:pt-24">
+          <div className="max-w-[1800px] mx-auto">
+            <Link href="/work" className="inline-flex items-center gap-2 text-gray-600 hover:text-black transition-colors mb-12">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M15 8H1M1 8L8 15M1 8L8 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Back to work
+            </Link>
+            <p className="text-gray-500 text-[18px]">Project not found.</p>
+          </div>
+        </main>
+        <div className="bg-white"><Footer /></div>
+      </div>
+    )
   }
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#FBF7FA' }}>
       <Header />
-      
-      {/* Hero Section */}
+
       <main className="px-6 md:px-12 lg:px-24 pt-16 md:pt-24">
         <div className="max-w-[1800px] mx-auto">
-          
-          {/* Back Button */}
+
+          {/* Back */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="mb-12"
           >
-            <Link 
-              href="/#portfolio" 
+            <Link
+              href="/work"
               className="inline-flex items-center gap-2 text-gray-600 hover:text-black transition-colors"
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -49,7 +64,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             </Link>
           </motion.div>
 
-          {/* Project Header */}
+          {/* Project header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -57,58 +72,52 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             className="grid md:grid-cols-3 gap-12 mb-16"
           >
             <div className="md:col-span-2">
-              <h1 className="text-[28px] md:text-[40px] lg:text-[48px] font-normal leading-tight mb-6" style={{ color: '#000000ff' }}>
+              <h1 className="text-[28px] md:text-[48px] font-medium leading-tight mb-6" style={{ color: '#1c1c1e' }}>
                 {caseStudy.title}
               </h1>
-              
-              {/* Description with Read More functionality */}
-              <div className="text-[16px] md:text-[18px] leading-relaxed text-gray-700 mb-8">
-                <p className="mb-4">{caseStudy.description}</p>
-                
-                {/* Expanded content */}
-                <AnimatePresence>
-                  {isExpanded && caseStudy.expandedDescription && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ 
-                        duration: 0.5, 
-                        ease: [0.4, 0.0, 0.2, 1],
-                        opacity: { duration: 0.3 },
-                        height: { duration: 0.5 }
-                      }}
-                      className="space-y-4 overflow-hidden"
-                    >
+
+              <div className="text-[16px] md:text-[18px] leading-relaxed text-gray-700 mb-4">
+                <p>{caseStudy.description}</p>
+              </div>
+
+              <AnimatePresence>
+                {isExpanded && caseStudy.expandedDescription && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <div className="space-y-4 text-[16px] md:text-[18px] leading-relaxed text-gray-700 mb-4">
                       {caseStudy.expandedDescription.split('\n\n').map((paragraph, index) => (
                         <p key={index} className={paragraph.startsWith('**') ? 'font-medium text-black' : ''}>
                           {paragraph.replace(/\*\*/g, '')}
                         </p>
                       ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-              
-              {/* Read More Button */}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
               {caseStudy.expandedDescription && (
                 <button
                   onClick={() => setIsExpanded(!isExpanded)}
-                  className="text-[14px] text-gray-600 hover:text-black transition-colors"
+                  className="text-[14px] text-gray-500 hover:text-black transition-colors"
                 >
                   {isExpanded ? 'Read less ↑' : 'Read more →'}
                 </button>
               )}
             </div>
-            
+
             {/* Deliverables */}
             <div>
-              <h3 className="text-[14px] font-semibold text-gray-500 uppercase tracking-wider mb-4">
-                Delivered:
+              <h3 className="text-[12px] font-semibold text-gray-400 uppercase tracking-wider mb-4">
+                Delivered
               </h3>
               <ul className="space-y-2">
                 {caseStudy.deliverables?.map((item, index) => (
-                  <li key={index} className="text-[14px] text-gray-700">
+                  <li key={index} className="text-[15px] text-gray-700">
                     — {item}
                   </li>
                 ))}
@@ -116,34 +125,18 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             </div>
           </motion.div>
 
-          {/* Hero Image with Overlay */}
+          {/* Hero image */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="relative w-full aspect-[16/9] bg-gray-900 rounded-lg overflow-hidden mb-20"
+            className="relative w-full aspect-[16/9] rounded-lg overflow-hidden mb-20"
           >
             <img
               src={caseStudy.heroImage}
-              alt={`${caseStudy.title} hero image`}
+              alt={caseStudy.title}
               className="w-full h-full object-cover"
             />
-            {/* Overlay Content */}
-            <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-              <div className="text-center text-white">
-                <div className="w-12 h-12 mx-auto mb-4">
-                  <svg viewBox="0 0 48 48" fill="currentColor">
-                    <path d="M24 4l6 18h18l-14.5 10.5L39.5 50 24 36 8.5 50l6-17.5L0 22h18L24 4z"/>
-                  </svg>
-                </div>
-                <h2 className="text-[18px] md:text-[24px] font-normal mb-2">
-                  {caseStudy.heroTitle || 'Inspiration'}
-                </h2>
-                <p className="text-[14px] md:text-[16px] opacity-80">
-                  {caseStudy.heroSubtitle || 'The guiding star'}
-                </p>
-              </div>
-            </div>
           </motion.div>
 
           {/* Project Brief */}
@@ -154,9 +147,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             viewport={{ once: true }}
             className="mb-20"
           >
-            <h2 className="text-[20px] md:text-[24px] font-normal mb-6" style={{ color: '#000000ff' }}>
-              Project Brief
-            </h2>
+            <h2 className="text-[20px] md:text-[24px] font-normal mb-6">Project Brief</h2>
             <p className="text-[16px] md:text-[18px] leading-relaxed text-gray-700 max-w-4xl">
               {caseStudy.projectBrief}
             </p>
@@ -170,9 +161,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             viewport={{ once: true }}
             className="mb-20"
           >
-            <h2 className="text-[20px] md:text-[24px] font-normal mb-6" style={{ color: '#000000ff' }}>
-              Challenge
-            </h2>
+            <h2 className="text-[20px] md:text-[24px] font-normal mb-6">Challenge</h2>
             <p className="text-[16px] md:text-[18px] leading-relaxed text-gray-700 max-w-4xl">
               {caseStudy.challenge}
             </p>
@@ -186,9 +175,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             viewport={{ once: true }}
             className="mb-20"
           >
-            <h2 className="text-[20px] md:text-[24px] font-normal mb-6" style={{ color: '#000000ff' }}>
-              Strategy
-            </h2>
+            <h2 className="text-[20px] md:text-[24px] font-normal mb-6">Strategy</h2>
             <p className="text-[16px] md:text-[18px] leading-relaxed text-gray-700 max-w-4xl">
               {caseStudy.strategy}
             </p>
@@ -202,16 +189,14 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             viewport={{ once: true }}
             className="mb-20"
           >
-            <h2 className="text-[20px] md:text-[24px] font-normal mb-6" style={{ color: '#000000ff' }}>
-              Solution
-            </h2>
+            <h2 className="text-[20px] md:text-[24px] font-normal mb-6">Solution</h2>
             <p className="text-[16px] md:text-[18px] leading-relaxed text-gray-700 max-w-4xl">
               {caseStudy.solution}
             </p>
           </motion.section>
 
-          {/* Image Gallery with Descriptions */}
-          {caseStudy.imageGallery?.map((imageSection, index) => (
+          {/* Image gallery */}
+          {caseStudy.imageGallery?.map((section, index) => (
             <motion.section
               key={index}
               initial={{ opacity: 0, y: 40 }}
@@ -220,29 +205,24 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               viewport={{ once: true }}
               className="mb-20"
             >
-              {/* Images */}
               <div className={`grid gap-4 mb-8 ${
-                imageSection.images.length === 2 ? 'md:grid-cols-2' : 
-                imageSection.images.length === 3 ? 'md:grid-cols-3' : 
+                section.images.length === 2 ? 'md:grid-cols-2' :
+                section.images.length === 3 ? 'md:grid-cols-3' :
                 'grid-cols-1'
               }`}>
-                {imageSection.images.map((image, imgIndex) => (
+                {section.images.map((image, imgIndex) => (
                   <div key={imgIndex} className="aspect-[4/3] bg-gray-100 rounded-lg overflow-hidden">
                     <img
                       src={image}
-                      alt={`${caseStudy.title} detail ${imgIndex + 1}`}
+                      alt={`${caseStudy.title} ${imgIndex + 1}`}
                       className="w-full h-full object-cover"
                     />
                   </div>
                 ))}
               </div>
-              
-              {/* Description */}
-              <h3 className="text-[18px] md:text-[20px] font-normal mb-4" style={{ color: '#000000ff' }}>
-                {imageSection.title}
-              </h3>
+              <h3 className="text-[18px] md:text-[20px] font-normal mb-3">{section.title}</h3>
               <p className="text-[16px] md:text-[18px] leading-relaxed text-gray-700">
-                {imageSection.description}
+                {section.description}
               </p>
             </motion.section>
           ))}
@@ -250,7 +230,9 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         </div>
       </main>
 
-      <Footer />
+      <div className="bg-white">
+        <Footer />
+      </div>
     </div>
   )
 }

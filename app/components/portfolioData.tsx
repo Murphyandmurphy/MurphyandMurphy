@@ -5,7 +5,7 @@ export const portfolioProjects: PortfolioProject[] = [
     id: 'cruising-to-100-roi',
     type: 'half',
     title: 'Cruising to 100% ROI',
-    categories: ['website'],
+    categories: ['Website Design'],
     backgroundColor: 'bg-gray-50',
     link: '/work/website/cruising-to-100-roi',
     content: (
@@ -18,73 +18,73 @@ export const portfolioProjects: PortfolioProject[] = [
       </div>
     )
   },
-  
+
   {
-    id: 'mountain-retreat',
+    id: 'pathfinder-wealth',
     type: 'half',
-    title: 'Mountain Retreat',
-    categories: ['Hospitality Design', 'Branding'],
+    title: 'Charting New Territory',
+    categories: ['Branding'],
     backgroundColor: 'bg-gray-50',
-    link: '/projects/mountain-retreat',
+    link: '/work/branding/pathfinder-wealth-management',
     content: (
       <div className="absolute inset-0">
         <img
           src="/images/wakatipu.jpg"
-          alt="Modern lake house interior with mountain views"
+          alt="Pathfinder brand identity"
           className="w-full h-full object-cover"
         />
       </div>
     )
   },
-  
+
+  {
+    id: 'mountain-retreat',
+    type: 'third',
+    title: 'Mountain Retreat',
+    categories: ['Branding'],
+    backgroundColor: 'bg-gray-50',
+    link: '/work/branding/mountain-retreat',
+    content: (
+      <div className="absolute inset-0">
+        <img
+          src="/images/wakatipu.jpg"
+          alt="Mountain retreat branding"
+          className="w-full h-full object-cover"
+        />
+      </div>
+    )
+  },
+
   {
     id: 'lakeside-dining',
     type: 'third',
     title: 'Lakeside Dining',
-    categories: ['Restaurant Design', 'F&B'],
+    categories: ['Design'],
     backgroundColor: 'bg-gray-50',
-    link: '/projects/lakeside-dining',
+    link: '/work/design/lakeside-dining',
     content: (
       <div className="absolute inset-0">
         <img
           src="/images/wakatipu.jpg"
-          alt="Modern lake house interior with mountain views"
+          alt="Lakeside dining design"
           className="w-full h-full object-cover"
         />
       </div>
     )
   },
-  
-  {
-    id: 'alpine-hotel',
-    type: 'third',
-    title: 'Alpine Hotel',
-    categories: ['Hospitality', 'Interior Design'],
-    backgroundColor: 'bg-gray-50',
-    link: '/projects/alpine-hotel',
-    content: (
-      <div className="absolute inset-0">
-        <img
-          src="/images/wakatipu.jpg"
-          alt="Modern lake house interior with mountain views"
-          className="w-full h-full object-cover"
-        />
-      </div>
-    )
-  },
-  
+
   {
     id: 'scenic-restaurant',
     type: 'third',
     title: 'Scenic Restaurant',
-    categories: ['F&B Design', 'Branding'],
+    categories: ['Digital & Social'],
     backgroundColor: 'bg-gray-50',
-    link: '/projects/scenic-restaurant',
+    link: '/work/digital/scenic-restaurant',
     content: (
       <div className="absolute inset-0">
         <img
           src="/images/wakatipu.jpg"
-          alt="Modern lake house interior with mountain views"
+          alt="Scenic restaurant digital"
           className="w-full h-full object-cover"
         />
       </div>
