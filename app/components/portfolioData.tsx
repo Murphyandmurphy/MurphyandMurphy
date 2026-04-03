@@ -2,35 +2,17 @@ import { PortfolioProject } from './PortfolioCard'
 
 export const portfolioProjects: PortfolioProject[] = [
   {
-    id: 'cruising-to-100-roi',
+    id: 'pathfinder-wealth-management',
     type: 'half',
-    title: 'Cruising to 100% ROI',
-    categories: ['Website Design'],
-    backgroundColor: 'bg-gray-50',
-    link: '/work/website/cruising-to-100-roi',
-    content: (
-      <div className="absolute inset-0">
-        <img
-          src="/images/wakatipu.jpg"
-          alt="Modern lake house interior with mountain views"
-          className="w-full h-full object-cover"
-        />
-      </div>
-    )
-  },
-
-  {
-    id: 'pathfinder-wealth',
-    type: 'half',
-    title: 'Charting New Territory',
+    title: 'Pathfinder Wealth Management',
     categories: ['Branding'],
     backgroundColor: 'bg-gray-50',
     link: '/work/branding/pathfinder-wealth-management',
     content: (
       <div className="absolute inset-0">
         <img
-          src="/images/wakatipu.jpg"
-          alt="Pathfinder brand identity"
+          src="/images/pathfinder-hero.jpg"
+          alt="Pathfinder Wealth Management"
           className="w-full h-full object-cover"
         />
       </div>
@@ -38,17 +20,17 @@ export const portfolioProjects: PortfolioProject[] = [
   },
 
   {
-    id: 'mountain-retreat',
-    type: 'third',
-    title: 'Mountain Retreat',
-    categories: ['Branding'],
+    id: 'bloom-interiors',
+    type: 'half',
+    title: 'Bloom Interiors',
+    categories: ['Website Design'],
     backgroundColor: 'bg-gray-50',
-    link: '/work/branding/mountain-retreat',
+    link: '/work/website/bloom-interiors',
     content: (
       <div className="absolute inset-0">
         <img
-          src="/images/wakatipu.jpg"
-          alt="Mountain retreat branding"
+          src="/images/bloom-hero.jpg"
+          alt="Bloom Interiors"
           className="w-full h-full object-cover"
         />
       </div>
@@ -56,38 +38,20 @@ export const portfolioProjects: PortfolioProject[] = [
   },
 
   {
-    id: 'lakeside-dining',
+    id: 'nova-fitness-app',
     type: 'third',
-    title: 'Lakeside Dining',
-    categories: ['Design'],
-    backgroundColor: 'bg-gray-50',
-    link: '/work/design/lakeside-dining',
-    content: (
-      <div className="absolute inset-0">
-        <img
-          src="/images/wakatipu.jpg"
-          alt="Lakeside dining design"
-          className="w-full h-full object-cover"
-        />
-      </div>
-    )
-  },
-
-  {
-    id: 'scenic-restaurant',
-    type: 'third',
-    title: 'Scenic Restaurant',
+    title: 'Nova Fitness',
     categories: ['Digital & Social'],
     backgroundColor: 'bg-gray-50',
-    link: '/work/digital/scenic-restaurant',
+    link: '/work/digital/nova-fitness-app',
     content: (
       <div className="absolute inset-0">
         <img
-          src="/images/wakatipu.jpg"
-          alt="Scenic restaurant digital"
+          src="/images/nova-hero.jpg"
+          alt="Nova Fitness"
           className="w-full h-full object-cover"
         />
       </div>
     )
-  }
+  },
 ]

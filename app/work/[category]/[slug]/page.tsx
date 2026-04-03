@@ -2,7 +2,6 @@
 import { use } from 'react'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import Link from 'next/link'
 import { getCaseStudyBySlug } from '../../../data/caseStudiesData'
 import Header from '../../../components/Header'
 import Footer from '../../../components/Footer'
@@ -24,15 +23,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
       <div className="min-h-screen" style={{ backgroundColor: '#FBF7FA' }}>
         <Header />
         <main className="px-6 md:px-12 lg:px-24 pt-16 md:pt-24">
-          <div className="max-w-[1800px] mx-auto">
-            <Link href="/work" className="inline-flex items-center gap-2 text-gray-600 hover:text-black transition-colors mb-12">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M15 8H1M1 8L8 15M1 8L8 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              Back to work
-            </Link>
-            <p className="text-gray-500 text-[18px]">Project not found.</p>
-          </div>
+          <p className="text-gray-500 text-[18px]">Project not found.</p>
         </main>
         <div className="bg-white"><Footer /></div>
       </div>
@@ -40,42 +31,56 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#FBF7FA' }}>
-      <Header />
+    <div style={{ backgroundColor: '#FBF7FA' }}>
 
-      <main className="px-6 md:px-12 lg:px-24 pt-16 md:pt-24">
+      {/* Hero — full viewport height, image extends beyond fold, title sits at bottom */}
+      <div className="relative h-[120vh]">
+
+        {/* Fixed header on top */}
+        <div className="absolute top-0 left-0 right-0 z-20">
+          <Header theme="dark" />
+        </div>
+
+        {/* Full-bleed background image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src={caseStudy.heroImage}
+            alt={caseStudy.title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/30" />
+        </div>
+
+        {/* Title pinned to bottom of the section (just below viewport fold) */}
+        <div className="absolute bottom-0 left-0 right-0 z-10 px-6 md:px-12 lg:px-24 pb-16">
+          <div className="max-w-[1800px] mx-auto">
+            <motion.h1
+              className="text-[40px] md:text-[72px] lg:text-[96px] font-medium leading-none tracking-tighter text-white"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            >
+              {caseStudy.title.split('\n').map((line, i) => (
+                <span key={i} className="block">{line}</span>
+              ))}
+            </motion.h1>
+          </div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <main className="px-6 md:px-12 lg:px-24 pt-20 pb-32">
         <div className="max-w-[1800px] mx-auto">
 
-          {/* Back */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-12"
-          >
-            <Link
-              href="/work"
-              className="inline-flex items-center gap-2 text-gray-600 hover:text-black transition-colors"
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M15 8H1M1 8L8 15M1 8L8 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              Back to work
-            </Link>
-          </motion.div>
-
-          {/* Project header */}
+          {/* Project header — description + deliverables */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="grid md:grid-cols-3 gap-12 mb-16"
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="grid md:grid-cols-3 gap-12 mb-20"
           >
             <div className="md:col-span-2">
-              <h1 className="text-[28px] md:text-[48px] font-medium leading-tight mb-6" style={{ color: '#1c1c1e' }}>
-                {caseStudy.title}
-              </h1>
-
               <div className="text-[16px] md:text-[18px] leading-relaxed text-gray-700 mb-4">
                 <p>{caseStudy.description}</p>
               </div>
@@ -91,9 +96,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
                   >
                     <div className="space-y-4 text-[16px] md:text-[18px] leading-relaxed text-gray-700 mb-4">
                       {caseStudy.expandedDescription.split('\n\n').map((paragraph, index) => (
-                        <p key={index} className={paragraph.startsWith('**') ? 'font-medium text-black' : ''}>
-                          {paragraph.replace(/\*\*/g, '')}
-                        </p>
+                        <p key={index}>{paragraph}</p>
                       ))}
                     </div>
                   </motion.div>
@@ -123,20 +126,6 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
                 ))}
               </ul>
             </div>
-          </motion.div>
-
-          {/* Hero image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="relative w-full aspect-[16/9] rounded-lg overflow-hidden mb-20"
-          >
-            <img
-              src={caseStudy.heroImage}
-              alt={caseStudy.title}
-              className="w-full h-full object-cover"
-            />
           </motion.div>
 
           {/* Project Brief */}
