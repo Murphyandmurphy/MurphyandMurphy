@@ -93,7 +93,7 @@ export default function Home() {
               <span className="text-[40px] md:text-[64px] lg:text-[80px] font-normal leading-none tracking-tighter shrink-0" style={{ color: '#1c1c1e' }}>
                 We
               </span>
-              <div className="overflow-hidden relative min-w-0 flex-1" style={{ isolation: 'isolate' }}>
+              <div className="overflow-hidden relative min-w-0 flex-1 pb-3" style={{ isolation: 'isolate' }}>
                 <AnimatePresence mode="wait">
                   <motion.p
                     key={sentenceIndex}
